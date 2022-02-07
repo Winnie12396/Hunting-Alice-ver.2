@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hunting Alice ver.2</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="scripts/aframe-render-order-component.js"></script>
+    <script src="scripts/aframe-video-player.js"></script>
+    <script src="scripts/aframe-attach-to.js"></script>
+  </head>
+  <body>
+    
+    <a-scene>
+      <a-assets>
+        <img id="target" src="./images/star.png"></img>
+        <!-- <img id="opening" src="./images/starter.png"></img> -->
+        <video id="clip" preload="auto" loop="false" src="./videos/b.mp4" crossOrigin=""></video>
+        
+      </a-assets>
+      <a-camera wasd-controls="enabled: false">
+        <a-cursor id="cursor"
+          color="white"
+          visible="true" 
+          cursor="fuse: true; fuseTimeout: 1000" raycaster="objects: [raycastable=true]"
+          event-set="_event: start; visible: false;"
+        ></a-cursor>
+        <a-entity id="hud" position="0 0 0"></a-entity>
+      </a-camera>
+
+      <a-videosphere id="vid" src="#clip" rotation="0 -90 0" 
+        visible="true"
+        video-player="playEvent:start;">
+      </a-videosphere>
+
+      
+
+      <a-plane fuse-button="fuseTimeout: 1000" 
+        visible="false"
+        width="2.5" height="1"
+        raycastable="true"
+        position="0 0.2 -10" raycastable="true"
+        event-set="_event: click; raycastable: false; visible: false; _delay: 300;"
+        proxy-event="event: click; to: #vid, #cursor, #front-sight; as: start">
+      </a-plane>
+
+      <a-entity id="front-sight" attach-to="#hud" render-order="999" 
+        visible="false"
+        raycastable="false" 
+        event-set="_event: start; visible: true;"
+      >
+        <a-image src="#target" scale="0.3 0.3 0.3" position="0 0 -1" material="alphaTest: 0.5"></a-image>  
+      </a-entity>
+
+            
+
+    </a-scene>
+  </body>
+</html>
