@@ -19,7 +19,7 @@
         <video id="clip" preload="auto" loop="false" src="./videos/b.mp4" crossOrigin="anonymous"></video>
         
       </a-assets>
-      <a-camera wasd-controls="enabled: false">
+      <a-camera wasd-controls="enabled: true">
         <a-cursor id="cursor"
           color="white"
           visible="true" 
@@ -45,6 +45,7 @@
         proxy-event="event: click; to: #vid, #cursor, #front-sight; as: start">
       </a-plane>
 
+      <!--
       <a-entity id="front-sight" attach-to="#hud" render-order="999" 
         visible="false"
         raycastable="false" 
@@ -52,6 +53,7 @@
       >
         <a-image src="#target" scale="0.3 0.3 0.3" position="0 0 -1" material="alphaTest: 0.5"></a-image>  
       </a-entity>
+      -->
 
             
 
